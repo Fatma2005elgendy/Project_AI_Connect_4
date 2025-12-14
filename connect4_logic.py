@@ -19,20 +19,20 @@ class Connect4:
         rows, cols = len(state), len(state[0])
 
         for c in range(cols):
-            if state[0][c] == "":                           # لو اول خانة في العمود دا فاضية
-                for r in range(rows-1, -1, -1):             # هبدأ check من تحت لفوق في الصف 
+            if state[0][c] == "":                          
+                for r in range(rows-1, -1, -1):           
                     if state[r][c] == "":
                         actions.append((player, r, c))
                         break
 
-        random.shuffle(actions)                               # هلغبط ترتيبهم عشوائيا --> عشان مش كل مره يلعب في نفس العمود , فأخلي اللعبه اكتر واقعية
-        actions.sort(key=lambda a: abs(a[2] - 3))             # هرتب الاكشنو بناءا علي مدي قربها للعمود الاوسط --> لان كل ما كنت بتلعب في النص كل ما كان احسن 
+        random.shuffle(actions)                               # هلغبط ترتيبهم عشوائيا 
+        actions.sort(key=lambda a: abs(a[2] - 3))             # هرتب الاكشنز بناءا علي مدي قربها للعمود الاوسط  
         return actions
 
 
     ############################################################ take_action #########################################################
     def take_action(self, state, action):
-        new_state = copy.deepcopy(state)    # هاخد نسخه من الاستيت تكون منفصله عنها تمام , لما نعدل فيها التعديل ميسمعش في الاصليه ودا باستخدام deepcopy()
+        new_state = copy.deepcopy(state)   
         p, r, c = action
         new_state[r][c] = p
         return new_state
