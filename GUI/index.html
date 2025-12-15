@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Connect 4 Pro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="theme-neon">
+    
+    <div class="theme-switcher">
+        <button onclick="setTheme('theme-neon')">Neon</button>
+        <button onclick="setTheme('theme-classic')">Classic</button>
+        <button onclick="setTheme('theme-dark')">Dark</button>
+    </div>
+
+    <h1>CONNECT 4 AI</h1>
+    
+    <div class="scoreboard">
+        <div class="score-box player-score">
+            <span>YOU (Red)</span>
+            <span id="scoreHuman">0</span>
+        </div>
+        <div class="score-box ai-score">
+            <span>AI (Yellow)</span>
+            <span id="scoreAI">0</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="modeHuman" class="mode-btn active-mode">Human vs AI</button>
+        <button id="modeAI" class="mode-btn">AI vs AI</button>
+        <button id="reset" class="reset-btn">New Game</button>
+    </div>
+
+    <div id="status">Mode: Human vs Computer</div>
+    
+    <div id="board"></div>
+    
+    <div id="message">Your turn (Red)!</div>
+
+    <div id="winnerModal" class="modal">
+        <div class="modal-content">
+            <h2 id="winnerText">WINNER!</h2>
+            <button id="modalResetBtn">Play Again ↻</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
