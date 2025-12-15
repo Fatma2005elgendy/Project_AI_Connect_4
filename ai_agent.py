@@ -2,25 +2,29 @@ import math
 import random
 
 class AIAgent:
-    def __init__(self, game_logic):
+    def _init_(self, game_logic):
         self.game = game_logic
+#__________________________________________
+
 
     def evaluate_window(self, window, piece):
         score = 0
         opp = "O" if piece == "X" else "X"
 
-        if window.count(piece) == 4: score += 100
-        elif window.count(piece) == 3 and window.count("") == 1: score += 5
-        elif window.count(piece) == 2 and window.count("") == 2: score += 2
-        if window.count(opp) == 3 and window.count("") == 1: score -= 4
+        if window.count(piece) == 4: score += 1000000
+        elif window.count(piece) == 3 and window.count("") == 1: score += 1000
+        elif window.count(piece) == 2 and window.count("") == 2: score += 10
+        if window.count(opp) == 3 and window.count("") == 1: score -= 60000
+        elif window.count(opp) == 4: score -= 1000000
 
         return score
+#__________________________________________
 
     def evaluate_board(self, state, piece):
         score = 0
         rows, cols = len(state), len(state[0])
 
-        score += [state[r][cols//2] for r in range(rows)].count(piece) * 3
+        score += [state[r][cols//2] for r in range(rows)].count(piece) * 100
 
         for r in range(rows):
             for c in range(cols-3):
@@ -40,6 +44,7 @@ class AIAgent:
                 score += self.evaluate_window([state[r-i][c+i] for i in range(4)], piece)
 
         return score
+#__________________________________________
 
     def MinMax(self, state, depth, alpha, beta, maximizing):
         result = self.game.check_terminal(state)
@@ -62,6 +67,7 @@ class AIAgent:
                 beta = min(beta, value)
                 if alpha >= beta: break
             return value
+#__________________________________________
 
     def get_best_move(self, state, depth=5):
         player = self.game.current_player(state)
